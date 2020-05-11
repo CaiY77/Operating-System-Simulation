@@ -6,14 +6,14 @@ This application simulates some aspects of the operating systems. It simulates c
 
 To run this program, run the command: py main.py (or another methods to run python code.)
 
-Information to Provide:
-How much RAM memory is there on the simulated computer?
+# Information to Provide:
+### How much RAM memory is there on the simulated computer?
 (do no include 'kilobytes' or words.)
 
-How many hard disks does the simulated computer have?
+### How many hard disks does the simulated computer have?
 (The enumeration of the hard disks starts with 0.)
 
-Possible Inputs:
+# Possible Inputs:
 ### A size
   ‘A’ input means that a new common process has been created. When the new process arrives, the program create its PCB and place the process in the ready-queue or the CPU. The requested amount of memory should be allocated for the new process. Process ID for the new process start from 1 and go up. Process ID are automatically generated and will not be reused. For example, the command A 1000 means that a new common process has been created and it requires 1000 bytes of memory.
 
