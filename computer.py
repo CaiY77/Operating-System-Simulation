@@ -26,14 +26,23 @@ class Computer:
                     self.cpu[0][2] = 'Running'
 
             elif process.type == 'Real-Time':
-                self.cpu.insert(0,[process.pid,process.type,process.status])
-                self.cpu[0][2] = 'Running'
-                if len(self.cpu) > 1:
-                    self.cpu[1][2] = 'Waiting'
+                if not self.cpu:
+                    self.cpu.insert(0,[process.pid,process.type,process.status])
+                    self.cpu[0][2] = 'Running'
+                    return
+                for x in range(len(self.cpu)):
+                    if self.cpu[x][1] == 'Common':
+                        self.cpu.insert(x,[process.pid,process.type,process.status])
+                        self.cpu[0][2] = 'Running'
+                        self.cpu[1][2] = 'Waiting'
+                        return
+                    elif self.cpu[x][1] == 'Real-Time' and x == len(self.cpu) - 1:
+                        self.cpu.append([process.pid,process.type,process.status])
 
     def terminate(self):
         pid = self.cpu.pop(0)
-        self.cpu[0][2] = 'Running'
+        if self.cpu:
+            self.cpu[0][2] = 'Running'
         for x in range(len(self.memory)-2):
             if self.memory[x+1][0] == pid[0]:
                 self.memory.pop(x+1)
@@ -43,7 +52,16 @@ class Computer:
         running_proccess = self.cpu.pop(0);
         self.cpu[0][2] = 'Running'
         running_proccess[2] = 'Waiting'
-        self.cpu.append(running_proccess)
+        if running_proccess[1] == 'Real-Time':
+            for x in range(len(self.cpu)):
+                if self.cpu[x][1] == 'Common':
+                    self.cpu.insert(x,running_proccess)
+                    return
+            self.cpu.append(running_proccess)
+            return
+        else:
+            self.cpu.append(running_proccess)
+            return
 
     def hdd_request(self,hdd_number):
         if self.cpu:
@@ -63,7 +81,11 @@ class Computer:
             if self.hdd[hdd_number]:
                 self.hdd[hdd_number][0][2] = "Running"
             if self.cpu:
-                self.cpu.append([process[0],process[3],'Waiting'])
+                if process[3] == 'Real-Time':
+                    self.cpu[0][2] = 'Waiting'
+                    self.cpu.insert(0,[process[0],process[3],'Running'])
+                else:
+                    self.cpu.append([process[0],process[3],'Waiting'])
             else:
                 self.cpu.append([process[0],process[3],'Running'])
         else:
@@ -87,10 +109,10 @@ class Computer:
             '|',each[2],' '*(11-len(each[2])), '|')
 
     def show_memory(self):
-        print('|---PID---|----START----|----END----|')
+        print('|---PID---|----START----|------END------|')
         for x in range(len(self.memory)-1):
             if x != 0:
                 print(
                 '|',self.memory[x][0],' '*(6-len(str(self.memory[x][0]))),
                 '|',self.memory[x][1],' '*(10-len(str(self.memory[x][1]))),
-                '|',self.memory[x][2],' '*(8-len(str(self.memory[x][2]))),'|')
+                '|',self.memory[x][2],' '*(12-len(str(self.memory[x][2]))),'|')
