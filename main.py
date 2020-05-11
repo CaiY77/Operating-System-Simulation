@@ -6,10 +6,24 @@ from process import Process
 from computer import Computer
 
 def print_invalid():
-    print('Invalid Command. Please try again.')
+    print('Invalid input. Please try again.')
 
-ram = int(input('How much RAM memory is there on the simulated computer? '))
-hdd = int(input('How many hard disks does the simulated computer have? '))
+while True:
+    try:
+        ram = int(input('How much RAM memory is there on the simulated computer? '))
+    except ValueError:
+        print_invalid()
+        continue
+    else:
+        break
+while True:
+    try:
+        hdd = int(input('How many hard disks does the simulated computer have? '))
+    except ValueError:
+        print_invalid()
+        continue
+    else:
+        break
 
 computer = Computer(ram,hdd)
 _loop = 1
@@ -42,10 +56,12 @@ while _loop == 1 :
         computer.terminate()
 
     elif ans[0] == 'd':
-        print('')
+        if ans[1].isdigit and int(ans[1]) <= hdd:
+            computer.hdd_request(int(ans[1]))
 
     elif ans[0] == 'D':
-        print('')
+        if ans[1].isdigit:
+            computer.hdd_finish(int(ans[1]))
 
     elif ans[0] == 'S':
         if ans[1] == 'r':
