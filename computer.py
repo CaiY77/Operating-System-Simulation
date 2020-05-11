@@ -1,6 +1,5 @@
 # Cai Yang
 # Operation System Simulation
-# CSCI 340
 
 class Computer:
     def __init__(self,_ram,_hdd):

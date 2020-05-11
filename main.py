@@ -1,6 +1,5 @@
 # Cai Yang
 # Operation System Simulation
-# CSCI 340
 
 from process import Process
 from computer import Computer
@@ -76,7 +75,7 @@ while _loop == 1 :
             computer.show_memory()
         else:
             print_invalid()
-            
+
     elif ans[0] == 'exit':
         _loop = 0
         print('Program Terminated')

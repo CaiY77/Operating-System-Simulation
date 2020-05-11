@@ -1,6 +1,5 @@
 # Cai Yang
 # Operation System Simulation
-# CSCI 340
 
 class Process:
     def __init__(self,size,pid,type):
