@@ -8,7 +8,7 @@ To run this program, run the command: py main.py (or another methods to run pyth
 
 ## Information to Provide:
 ### How much RAM memory is there on the simulated computer?
-(do no include 'kilobytes' or words.)
+(Do not include 'kilobytes' or words.)
 
 ### How many hard disks does the simulated computer have?
 (The enumeration of the hard disks starts with 0.)
