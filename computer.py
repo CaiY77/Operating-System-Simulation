@@ -46,22 +46,28 @@ class Computer:
         self.cpu.append(running_proccess)
 
     def hdd_request(self,hdd_number):
-        process = self.cpu.pop(0)
         if self.cpu:
-            self.cpu[0][2] = 'Running'
-        if self.hdd[hdd_number]:
-            self.hdd[hdd_number].append([process[0],hdd_number,'Waiting',process[1]])
+            process = self.cpu.pop(0)
+            if self.cpu:
+                self.cpu[0][2] = 'Running'
+            if self.hdd[hdd_number]:
+                self.hdd[hdd_number].append([process[0],hdd_number,'Waiting',process[1]])
+            else:
+                self.hdd[hdd_number].append([process[0],hdd_number,'Running',process[1]])
         else:
-            self.hdd[hdd_number].append([process[0],hdd_number,'Running',process[1]])
+            print('You currently have no process')
 
     def hdd_finish(self,hdd_number):
-        process = self.hdd[hdd_number].pop(0)
         if self.hdd[hdd_number]:
-            self.hdd[hdd_number][0][2] = "Running"
-        if self.cpu:
-            self.cpu.append([process[0],process[3],'Waiting'])
+            process = self.hdd[hdd_number].pop(0)
+            if self.hdd[hdd_number]:
+                self.hdd[hdd_number][0][2] = "Running"
+            if self.cpu:
+                self.cpu.append([process[0],process[3],'Waiting'])
+            else:
+                self.cpu.append([process[0],process[3],'Running'])
         else:
-            self.cpu.append([process[0],process[3],'Running'])
+            print('There are no process running on this disk')
 
     def show_hdd(self):
         print('|---PID---|---HDD---|----STATUS----|')

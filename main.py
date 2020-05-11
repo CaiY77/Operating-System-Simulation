@@ -56,21 +56,27 @@ while _loop == 1 :
         computer.terminate()
 
     elif ans[0] == 'd':
-        if ans[1].isdigit and int(ans[1]) <= hdd:
+        if ans[1].isdigit and int(ans[1]) <= hdd-1:
             computer.hdd_request(int(ans[1]))
+        else:
+            print('Disk does not exist')
 
     elif ans[0] == 'D':
-        if ans[1].isdigit:
+        if ans[1].isdigit and int(ans[1]) <= hdd-1:
             computer.hdd_finish(int(ans[1]))
+        else:
+            print('Disk does not exist')
 
     elif ans[0] == 'S':
         if ans[1] == 'r':
             computer.show_cpu()
-        if ans[1] == 'i':
+        elif ans[1] == 'i':
             computer.show_hdd()
-        if ans[1] == 'm':
+        elif ans[1] == 'm':
             computer.show_memory()
-
+        else:
+            print_invalid()
+            
     elif ans[0] == 'exit':
         _loop = 0
         print('Program Terminated')
